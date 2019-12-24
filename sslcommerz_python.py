@@ -17,8 +17,8 @@ class SSLCPayment:
         self.sslc_session_api = 'https://' + self.sslc_mode_name + '.' + const.SSLCZ_SESSION_API
         self.sslc_validation_api = 'https://' + self.sslc_mode_name + '.' + const.SSLCZ_VALIDATION_API
 
-
-    def set_sslcommerz_mode(self, sslc_is_sandbox: bool) -> str:
+    @staticmethod
+    def set_sslcommerz_mode(sslc_is_sandbox: bool) -> str:
         if sslc_is_sandbox is True or sslc_is_sandbox == 1:
             return 'sandbox'
         else:
