@@ -45,3 +45,13 @@ class SSLCPayment:
         self.integration_data['product_category'] = product_category
         self.integration_data['product_name'] = product_name
         self.integration_data['product_profile'] = product_profile
+
+    def set_customer_info(self, name: str, email: str, address1: str, city: str, postcode: str, country: str, phone: str, address2: str='') -> None:
+        self.integration_data['cus_name'] = name
+        self.integration_data['cus_email'] = email
+        self.integration_data['cus_add1'] = address1
+        self.integration_data['cus_add2'] = address2
+        self.integration_data['cus_city'] = city
+        self.integration_data['cus_postcode'] = postcode
+        self.integration_data['cus_country'] = country
+        self.integration_data['cus_phone'] = phone
