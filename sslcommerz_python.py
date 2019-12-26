@@ -36,7 +36,7 @@ class SSLCPayment:
         self.integration_data['cancel_url'] = cancel_url
         self.integration_data['ipn_url'] = ipn_url
 
-    def set_product_integration(self, total_amount: Decimal, currency: str, product_category: str, product_name: str, product_profile: str='None') -> None:
+    def set_product_integration(self, total_amount: Decimal, currency: str, product_category: str, product_name: str, num_of_item: int, shipping_method: str, product_profile: str='None') -> None:
         self.integration_data['store_id'] = self.sslc_store_id
         self.integration_data['store_passwd'] = self.sslc_store_pass
         self.integration_data['tran_id'] = str(uuid4())
@@ -44,6 +44,8 @@ class SSLCPayment:
         self.integration_data['currency'] = currency
         self.integration_data['product_category'] = product_category
         self.integration_data['product_name'] = product_name
+        self.integration_data['num_of_item'] = num_of_item
+        self.integration_data['shipping_method'] = shipping_method
         self.integration_data['product_profile'] = product_profile
 
     def set_customer_info(self, name: str, email: str, address1: str, city: str, postcode: str, country: str, phone: str, address2: str='') -> None:
@@ -55,3 +57,4 @@ class SSLCPayment:
         self.integration_data['cus_postcode'] = postcode
         self.integration_data['cus_country'] = country
         self.integration_data['cus_phone'] = phone
+
