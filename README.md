@@ -1,6 +1,11 @@
 # SSLCOMMERZ Payment Gateway implementation in Python
 Provides a python module to implement payment gateway in python based web apps.
 
+## Installation
+Via PIP
+```bash
+pip install sslcommerz-python
+```
 ## Projected use
 ```python
 from sslcommerz_python.payment import SSLCSession
