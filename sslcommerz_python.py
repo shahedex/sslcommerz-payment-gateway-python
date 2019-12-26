@@ -29,16 +29,17 @@ class SSLCPayment:
 
     def set_user_info(self):
         pass
+    
+    def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
+        self.integration_data['success_url'] = success_url
+        self.integration_data['fail_url'] = fail_url
+        self.integration_data['cancel_url'] = cancel_url
+        self.integration_data['ipn_url'] = ipn_url
 
-    def set_integration(self, total_amount: Decimal, currency: str, product_category: str,
-                        success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
+    def set_integration(self, total_amount: Decimal, currency: str, product_category: str) -> None:
         self.integration_data['store_id'] = self.sslc_store_id
         self.integration_data['store_passwd'] = self.sslc_store_pass
         self.integration_data['tran_id'] = str(uuid4())
         self.integration_data['total_amount'] = total_amount
         self.integration_data['currency'] = currency
         self.integration_data['product_category'] = product_category
-        self.integration_data['success_url'] = success_url
-        self.integration_data['fail_url'] = fail_url
-        self.integration_data['cancel_url'] = cancel_url
-        self.integration_data['ipn_url'] = ipn_url
