@@ -58,3 +58,9 @@ class SSLCPayment:
         self.integration_data['cus_country'] = country
         self.integration_data['cus_phone'] = phone
 
+    def set_shipping_info(self, shipping_to: str, address: str, city: str, postcode: str, country: str) -> None:
+        self.integration_data['ship_name'] = shipping_to
+        self.integration_data['ship_add1'] = address
+        self.integration_data['ship_city'] = city
+        self.integration_data['ship_postcode'] = postcode
+        self.integration_data['ship_country'] = country
