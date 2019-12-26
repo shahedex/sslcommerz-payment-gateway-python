@@ -72,6 +72,10 @@ class SSLCPayment:
 
         if response_sslc.status_code == 200:
             response_json = json.loads(response_sslc.text)
+            if response_json['status'] == 'FAILED':
+                response_data['status'] = response_json['status']
+                response_data['failedreason'] = response_json['failedreason']
+                return response_data
             response_data['status'] = response_json['status']
             response_data['sessionkey'] = response_json['sessionkey']
             response_data['GatewayPageURL'] = response_json['GatewayPageURL']
