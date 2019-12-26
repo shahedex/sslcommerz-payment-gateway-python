@@ -4,10 +4,10 @@ from uuid import uuid4
 import requests
 import json
 
-import _constants as const
+import sslcommerz_python._constants as const
 
 
-class SSLCPayment:
+class SSLCSession:
     sslc_is_sandbox : bool
     sslc_store_id : str
     sslc_store_pass : str

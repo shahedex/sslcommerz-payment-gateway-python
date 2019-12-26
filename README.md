@@ -3,9 +3,10 @@ Provides a python module to implement payment gateway in python based web apps.
 
 ## Projected use
 ```python
-from sslcommerz_python import SSLCPayment
+from sslcommerz_python.payment import SSLCSession
+from decimal import Decimal
 
-mypayment = SSLCPayment(sslc_is_sandbox=True, sslc_store_id='your_sslc_store_id', sslc_store_pass='your_sslc_store_passcode')
+mypayment = SSLCSession(sslc_is_sandbox=True, sslc_store_id='your_sslc_store_id', sslc_store_pass='your_sslc_store_passcode')
 
 mypayment.set_urls(success_url='example.com/success', fail_url='example.com/failed', cancel_url='example.com/cancel', ipn_url='example.com/payment_notification')
 
