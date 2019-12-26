@@ -17,3 +17,31 @@ mypayment.set_shipping_info(shipping_to='demo customer', address='demo address',
 
 response_data = mypayment.init_payment()
 ```
+
+## Response parameters
+### When Successfull with Auth and Payloads provided
+> status
+> sessionkey
+> GatewayPageURL
+
+#### Example
+```python
+>>> response_data['status']
+SUCCESS
+>>> response_data['sessionkey']
+F650E87F23DD2A8FFCB4E4E333C13B28
+>>> response_data['GatewayPageURL']
+https://sandbox.sslcommerz.com/EasyCheckOut/testcdef650e87f23dd2a8ffcb4234fasf3b28
+```
+
+### When Failed
+> status
+> failedreason
+
+#### Example
+```python
+>>> response_data['status']
+FAILED
+>>> response_data['failedreason']
+'Store Credential Error Or Store is De-active'
+```
