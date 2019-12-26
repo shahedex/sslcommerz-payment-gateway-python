@@ -1,6 +1,8 @@
 from typing import Dict
 from decimal import Decimal
 from uuid import uuid4
+import requests
+import json
 
 import _constants as const
 
@@ -26,9 +28,6 @@ class SSLCPayment:
             return 'sandbox'
         else:
             return 'securepay'
-
-    def set_user_info(self):
-        pass
     
     def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
         self.integration_data['success_url'] = success_url
@@ -64,3 +63,21 @@ class SSLCPayment:
         self.integration_data['ship_city'] = city
         self.integration_data['ship_postcode'] = postcode
         self.integration_data['ship_country'] = country
+
+    def init_payment(self):
+        post_url = self.sslc_session_api
+        post_data = self.integration_data
+        response_sslc = requests.post(post_url, post_data)
+        response_data : Dict[str, str] = {}
+
+        if response_sslc.status_code == 200:
+            response_json = json.loads(response_sslc.text)
+            response_data['status'] = response_json['status']
+            response_data['sessionkey'] = response_json['sessionkey']
+            response_data['GatewayPageURL'] = response_json['GatewayPageURL']
+            return response_data
+        else:
+            response_json = json.loads(response_sslc.text)
+            response_data['status'] = response_json['status']
+            response_data['failedreason'] = response_json['failedreason']
+            return response_data
