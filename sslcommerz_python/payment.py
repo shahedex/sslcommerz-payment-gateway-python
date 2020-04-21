@@ -7,7 +7,7 @@ import json
 import sslcommerz_python._constants as const
 
 
-class SSLCSession:
+class SSLCommerz:
     sslc_is_sandbox : bool
     sslc_store_id : str
     sslc_store_pass : str
@@ -28,6 +28,11 @@ class SSLCSession:
             return 'sandbox'
         else:
             return 'securepay'
+
+
+class SSLCSession(SSLCommerz):
+    def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
+        super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
     
     def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
         self.integration_data['success_url'] = success_url
@@ -85,3 +90,34 @@ class SSLCSession:
             response_data['status'] = response_json['status']
             response_data['failedreason'] = response_json['failedreason']
             return response_data
+
+
+class Validation(SSLCommerz):
+    def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
+        super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
+
+    def validate_transaction(self, validation_id):
+        query_params : Dict[str, str] = {}
+        response_data : Dict[str, str] = {}
+        query_params['val_id'] = validation_id
+        query_params['store_id'] = self.sslc_store_id
+        query_params['store_passwd'] = self.sslc_store_pass
+        query_params['format'] = 'json'
+
+        validation_response = requests.get(
+            self.sslc_validation_api,
+            params=query_params
+        )
+
+        if validation_response.status_code == 200:
+            validation_json = validation_response.json()
+            if validation_json['status'] == 'VALIDATED':
+                response_data['status'] = 'VALIDATED'
+                response_data['data'] = validation_json
+            else:
+                response_data['status'] = validation_json['status']
+                response_data['data'] = validation_json
+        else:
+            response_data['status'] = 'FAILED'
+            response_data['data'] = 'Validation failed due to status code ' + str(validation_response.status_code)
+        return response_data
