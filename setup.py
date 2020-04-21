@@ -20,7 +20,7 @@ requires = [
 
 setuptools.setup(
     name="sslcommerz-python",
-    version="0.0.5",
+    version="0.0.6",
     author="Shahed Mehbub",
     author_email="shahed739@gmail.com",
     description="Implements SSLCOMMERZ payment gateway in python based web apps.",
