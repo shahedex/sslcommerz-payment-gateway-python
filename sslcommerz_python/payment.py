@@ -156,4 +156,4 @@ class Validation(SSLCommerz):
 
     @staticmethod
     def sort_keys(data_dict):
-        return [(key, data_dict[k]) for key in sorted(data_dict.keys())]
+        return [(key, data_dict[key]) for key in sorted(data_dict.keys())]
