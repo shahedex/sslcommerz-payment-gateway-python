@@ -35,7 +35,7 @@ class SSLCSession(SSLCommerz):
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
         super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
 
-    def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
+    def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str = '') -> None:
         self.integration_data['success_url'] = success_url
         self.integration_data['fail_url'] = fail_url
         self.integration_data['cancel_url'] = cancel_url
@@ -69,6 +69,12 @@ class SSLCSession(SSLCommerz):
         self.integration_data['ship_city'] = city
         self.integration_data['ship_postcode'] = postcode
         self.integration_data['ship_country'] = country
+
+    def set_additional_values(self, value_a: str = '', value_b: str = '', value_c: str = '', value_d: str = '') -> None:
+        self.integration_data['value_a'] = value_a
+        self.integration_data['value_b'] = value_b
+        self.integration_data['value_c'] = value_c
+        self.integration_data['value_d'] = value_d
 
     def init_payment(self):
         post_url = self.sslc_session_api
