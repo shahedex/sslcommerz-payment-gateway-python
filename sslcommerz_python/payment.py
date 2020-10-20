@@ -9,11 +9,11 @@ import sslcommerz_python._constants as const
 
 
 class SSLCommerz:
-    sslc_is_sandbox : bool
-    sslc_store_id : str
-    sslc_store_pass : str
-    sslc_mode_name : str
-    integration_data : Dict[str, str] = {}
+    sslc_is_sandbox: bool
+    sslc_store_id: str
+    sslc_store_pass: str
+    sslc_mode_name: str
+    integration_data: Dict[str, str] = {}
 
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
         self.sslc_mode_name = self.set_sslcommerz_mode(sslc_is_sandbox)
@@ -34,7 +34,7 @@ class SSLCommerz:
 class SSLCSession(SSLCommerz):
     def __init__(self, sslc_is_sandbox=True, sslc_store_id='', sslc_store_pass='') -> None:
         super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
-    
+
     def set_urls(self, success_url: str, fail_url: str, cancel_url: str, ipn_url: str='') -> None:
         self.integration_data['success_url'] = success_url
         self.integration_data['fail_url'] = fail_url
@@ -74,7 +74,7 @@ class SSLCSession(SSLCommerz):
         post_url = self.sslc_session_api
         post_data = self.integration_data
         response_sslc = requests.post(post_url, post_data)
-        response_data : Dict[str, str] = {}
+        response_data: Dict[str, str] = {}
 
         if response_sslc.status_code == 200:
             response_json = json.loads(response_sslc.text)
@@ -98,8 +98,8 @@ class Validation(SSLCommerz):
         super().__init__(sslc_is_sandbox, sslc_store_id, sslc_store_pass)
 
     def validate_transaction(self, validation_id):
-        query_params : Dict[str, str] = {}
-        response_data : Dict[str, str] = {}
+        query_params: Dict[str, str] = {}
+        response_data: Dict[str, str] = {}
         query_params['val_id'] = validation_id
         query_params['store_id'] = self.sslc_store_id
         query_params['store_passwd'] = self.sslc_store_pass
@@ -123,10 +123,9 @@ class Validation(SSLCommerz):
             response_data['data'] = 'Validation failed due to status code ' + str(validation_response.status_code)
         return response_data
 
-
     def validate_ipn_hash(self, ipn_data):
         if self.key_check(ipn_data, 'verify_key') and self.key_check(ipn_data, 'verify_sign'):
-            check_params : Dict[str, str] = {}
+            check_params: Dict[str, str] = {}
             verify_key = ipn_data['verify_key'].split(',')
 
             for key in verify_key:
