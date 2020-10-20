@@ -21,6 +21,9 @@ mypayment.set_customer_info(name='John Doe', email='johndoe@email.com', address1
 
 mypayment.set_shipping_info(shipping_to='demo customer', address='demo address', city='Dhaka', postcode='1209', country='Bangladesh')
 
+# If you want to post some additional values
+mypayment.set_additional_values(value_a='cusotmer@email.com', value_b='portalcustomerid', value_c='1234', value_d='uuid')
+
 response_data = mypayment.init_payment()
 ```
 
