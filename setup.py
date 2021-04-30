@@ -14,7 +14,7 @@ requires = [
     'requests==2.22.0',
     'six==1.13.0',
     'typed-ast==1.4.0',
-    'urllib3==1.25.7',
+    'urllib3==1.25.8',
     'wrapt==1.11.2'
 ]
 
