@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 requires = [
     'astroid==2.3.3',
-    'certifi==2019.11.28',
+    'certifi==2022.12.7',
     'chardet==3.0.4',
     'idna==2.8',
     'isort==4.3.21',
